@@ -1,5 +1,5 @@
-const MEAL_API = 'https://www.themealdb.com/api/json/v1/1';
-const COCKTAIL_API = 'https://www.thecocktaildb.com/api/json/v1/1';
+const MEAL_API = "https://www.themealdb.com/api/json/v1/1";
+const COCKTAIL_API = "https://www.thecocktaildb.com/api/json/v1/1";
 
 export interface Recipe {
   idMeal?: string;
@@ -22,8 +22,9 @@ export interface Category {
   strCategoryDescription?: string;
 }
 
-// Meals API
-export const getMealsByCategory = async (category: string): Promise<Recipe[]> => {
+export const getMealsByCategory = async (
+  category: string
+): Promise<Recipe[]> => {
   const response = await fetch(`${MEAL_API}/filter.php?c=${category}`);
   const data = await response.json();
   return data.meals || [];
@@ -53,8 +54,9 @@ export const getRandomMeal = async (): Promise<Recipe | null> => {
   return data.meals?.[0] || null;
 };
 
-// Drinks API
-export const getDrinksByCategory = async (category: string): Promise<Recipe[]> => {
+export const getDrinksByCategory = async (
+  category: string
+): Promise<Recipe[]> => {
   const response = await fetch(`${COCKTAIL_API}/filter.php?c=${category}`);
   const data = await response.json();
   return data.drinks || [];
@@ -75,7 +77,11 @@ export const searchDrinksByName = async (name: string): Promise<Recipe[]> => {
 export const getDrinkCategories = async (): Promise<Category[]> => {
   const response = await fetch(`${COCKTAIL_API}/list.php?c=list`);
   const data = await response.json();
-  return data.drinks?.map((d: { strCategory: string }) => ({ strCategory: d.strCategory })) || [];
+  return (
+    data.drinks?.map((d: { strCategory: string }) => ({
+      strCategory: d.strCategory,
+    })) || []
+  );
 };
 
 export const getRandomDrink = async (): Promise<Recipe | null> => {
