@@ -12,7 +12,7 @@ import RecipeDetails from "./pages/RecipeDetails";
 import Explore from "./pages/Explore";
 import Profile from "./pages/Profile";
 import Favorites from "./pages/Favorites";
-import NotFound from "./pages/Notfound";
+import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
 
