@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { RecipeCard } from "../../components/RecipeCard";
 import { FavoritesProvider } from "../../contexts/FavoritesContext";
-import { userInfo } from "os";
 import userEvent from "@testing-library/user-event";
 
 const mockRecipe = {
@@ -14,7 +13,7 @@ const mockRecipe = {
 };
 
 const RecipeCardWrapper = ({ children }: { children: React.ReactNode }) => {
-  <FavoritesProvider>{children} </FavoritesProvider>;
+  return <FavoritesProvider>{children}</FavoritesProvider>;
 };
 
 describe("RecipeCard", () => {
@@ -50,7 +49,7 @@ describe("RecipeCard", () => {
   });
 
   it("adiciona e remove dos favoritos", async () => {
-    const user = userInfo.setup();
+    const user = userEvent.setup();
     const mockOnClick = vi.fn();
 
     const { getByRole } = render(
