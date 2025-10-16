@@ -1,22 +1,26 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { RecipeCard } from "../../components/RecipeCard";
 import { FavoritesProvider } from "../../contexts/FavoritesContext";
-import userEvent from "@testing-library/user-event";
 
 const mockRecipe = {
   idMeal: "52772",
-  strMeal: "Teriyali Chicken Casserole",
+  strMeal: "Teriyaki Chicken Casserole",
   strMealThumb:
     "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
-  strCategory: "chicken",
+  strCategory: "Chicken",
 };
 
-const RecipeCardWrapper = ({ children }: { children: React.ReactNode }) => {
-  return <FavoritesProvider>{children}</FavoritesProvider>;
-};
+const RecipeCardWrapper = ({ children }: { children: React.ReactNode }) => (
+  <FavoritesProvider>{children}</FavoritesProvider>
+);
 
 describe("RecipeCard", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   it("renderiza o card com informações da receita", () => {
     const mockOnClick = vi.fn();
 
@@ -35,15 +39,14 @@ describe("RecipeCard", () => {
     const user = userEvent.setup();
     const mockOnClick = vi.fn();
 
-    const { getByText } = render(
+    const { container } = render(
       <RecipeCardWrapper>
         <RecipeCard recipe={mockRecipe} onClick={mockOnClick} />
       </RecipeCardWrapper>
     );
 
-    const card = getByText("Teriyaki Chicken Casserole").closest(
-      'div[class*="cursor-pointer"]'
-    );
+    const card = container.querySelector(".cursor-pointer");
+    expect(card).toBeTruthy();
     await user.click(card!);
     expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
@@ -58,12 +61,13 @@ describe("RecipeCard", () => {
       </RecipeCardWrapper>
     );
 
-    const favoriteButton = getByRole("button");
+    const favoriteButton = getByRole("button", { name: "" });
 
     await user.click(favoriteButton);
     expect(localStorage.getItem("recipeFavorites")).toContain("52772");
 
     await user.click(favoriteButton);
-    expect(localStorage.getItem("recipeFavorites")).not.toContain("52772");
+    const stored = localStorage.getItem("recipeFavorites");
+    expect(stored === null || !stored.includes("52772")).toBe(true);
   });
 });

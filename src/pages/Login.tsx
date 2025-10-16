@@ -1,12 +1,13 @@
-import { useState, type SetStateAction } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "../components/ui/label";
 import { Card } from "../components/ui/card";
 import { toast } from "sonner";
 import { ChefHat } from "lucide-react";
+import heroImage from "@/assets/hero-cooking.jpg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -38,10 +39,11 @@ export default function Login() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      {/* Hero Background */}
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `url(${"/hero-cooking.jpg"})`,
+          backgroundImage: `url(${heroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -49,6 +51,7 @@ export default function Login() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95" />
       </div>
 
+      {/* Content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <Card className="w-full max-w-md p-8 shadow-strong bg-card/95 backdrop-blur-sm">
           <div className="text-center mb-8">
@@ -71,9 +74,7 @@ export default function Login() {
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e: { target: { value: SetStateAction<string> } }) =>
-                  setEmail(e.target.value)
-                }
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="shadow-soft"
               />
@@ -86,16 +87,19 @@ export default function Login() {
                 type="password"
                 placeholder="Senha"
                 value={password}
-                onChange={(e: { target: { value: SetStateAction<string> } }) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
                 className="shadow-soft"
               />
             </div>
 
-            <Button type="submit" className="w-full" variant="hero" size="lg">
+            <Button
+              type="submit"
+              className="w-full"
+              size="lg"
+              disabled={!email || password.length < 6}
+            >
               Entrar
             </Button>
 

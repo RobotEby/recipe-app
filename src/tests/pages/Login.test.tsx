@@ -1,9 +1,9 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "../../contexts/AuthContext";
 import Login from "../../pages/Login";
+import { AuthProvider } from "../../contexts/AuthContext";
 
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
@@ -21,6 +21,11 @@ const LoginWrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("Login Page", () => {
+  beforeEach(() => {
+    mockNavigate.mockClear();
+    localStorage.clear();
+  });
+
   it("renderiza formulário de login", () => {
     const { getByPlaceholderText, getByRole } = render(
       <LoginWrapper>
@@ -28,8 +33,8 @@ describe("Login Page", () => {
       </LoginWrapper>
     );
 
-    expect(getByPlaceholderText("seu@email.com")).toBeInTheDocument();
-    expect(getByPlaceholderText("Mínimo 6 caracteres")).toBeInTheDocument();
+    expect(getByPlaceholderText("Email")).toBeInTheDocument();
+    expect(getByPlaceholderText("Senha")).toBeInTheDocument();
     expect(getByRole("button", { name: /entrar/i })).toBeInTheDocument();
   });
 
@@ -53,8 +58,8 @@ describe("Login Page", () => {
       </LoginWrapper>
     );
 
-    const emailInput = getByPlaceholderText("seu@email.com");
-    const passwordInput = getByPlaceholderText("Mínimo 6 caracteres");
+    const emailInput = getByPlaceholderText("Email");
+    const passwordInput = getByPlaceholderText("Senha");
     const button = getByRole("button", { name: /entrar/i });
 
     await user.type(emailInput, "teste@email.com");
@@ -72,16 +77,14 @@ describe("Login Page", () => {
       </LoginWrapper>
     );
 
-    const emailInput = getByPlaceholderText("seu@email.com");
-    const passwordInput = getByPlaceholderText("Mínimo 6 caracteres");
+    const emailInput = getByPlaceholderText("Email");
+    const passwordInput = getByPlaceholderText("Senha");
     const button = getByRole("button", { name: /entrar/i });
 
     await user.type(emailInput, "teste@email.com");
     await user.type(passwordInput, "senha123");
     await user.click(button);
 
-    await vi.waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith("/comidas");
-    });
+    expect(mockNavigate).toHaveBeenCalledWith("/comidas");
   });
 });
