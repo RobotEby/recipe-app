@@ -57,8 +57,21 @@ describe("FavoritesContext", () => {
   });
 
   it("carrega favoritos do localStorage ao inicializar", () => {
-    localStorage.setItem("recipeFavorites", JSON.stringify(["52772", "52893"]));
+    const testFavorites = ["52772", "52893"];
+    localStorage.setItem("recipeFavorites", JSON.stringify(testFavorites));
 
+    const TestWrapper = ({ children }: { children: React.ReactNode }) => (
+      <FavoritesProvider>{children}</FavoritesProvider>
+    );
+
+    const { result } = renderHook(() => useFavorites(), {
+      wrapper: TestWrapper,
+    });
+
+    expect(result.current.favorites).toEqual(testFavorites);
+  });
+
+  it("verifica se receita está nos favoritos", () => {
     const { result } = renderHook(() => useFavorites(), { wrapper });
 
     act(() => {

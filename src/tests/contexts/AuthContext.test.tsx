@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { AuthProvider, useAuth } from "../../contexts/AuthContext";
 import { renderHook, act } from "@testing-library/react";
+import { AuthProvider, useAuth } from "../../contexts/AuthContext";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <AuthProvider>{children}</AuthProvider>
@@ -18,11 +18,11 @@ describe("AuthContext", () => {
     expect(result.current.isAuthenticated).toBe(false);
   });
 
-  it("faz login com credenciais inválidas", () => {
+  it("faz login com credenciais válidas", () => {
     const { result } = renderHook(() => useAuth(), { wrapper });
 
     act(() => {
-      const success = result.current.login("test@email.com", "senha123");
+      const success = result.current.login("teste@email.com", "senha123");
       expect(success).toBe(true);
     });
 
@@ -78,11 +78,15 @@ describe("AuthContext", () => {
     expect(localStorage.getItem("recipeAppUser")).toBeNull();
   });
 
-  it("carrega usuário ao localStorage ao inicializar", () => {
+  it("carrega usuário do localStorage ao inicializar", () => {
     const user = { email: "teste@email.com", name: "teste" };
     localStorage.setItem("recipeAppUser", JSON.stringify(user));
 
-    const { result } = renderHook(() => useAuth(), { wrapper });
+    const TestWrapper = ({ children }: { children: React.ReactNode }) => (
+      <AuthProvider>{children}</AuthProvider>
+    );
+
+    const { result } = renderHook(() => useAuth(), { wrapper: TestWrapper });
 
     expect(result.current.user).toEqual(user);
     expect(result.current.isAuthenticated).toBe(true);
