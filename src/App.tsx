@@ -1,18 +1,18 @@
-import { Toaster } from "./components/ui/toaster";
-import { Toaster as Sonner } from "./components/ui/sonner";
-import { TooltipProvider } from "./components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import { FavoritesProvider } from "./contexts/FavoritesContext";
-import Login from "./pages/Login";
-import Foods from "./pages/Foods";
-import Drinks from "./pages/Drinks";
-import RecipeDetails from "./pages/RecipeDetails";
-import Explore from "./pages/Explore";
-import Profile from "./pages/Profile";
-import Favorites from "./pages/Favorites";
-import NotFound from "./pages/NotFound";
+import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import { FavoritesProvider } from '@/contexts/FavoritesContext';
+import Login from './pages/Login';
+import Foods from './pages/Foods';
+import Drinks from './pages/Drinks';
+import RecipeDetails from './pages/RecipeDetails';
+import Explore from './pages/Explore';
+import Profile from './pages/Profile';
+import Favorites from './pages/Favorites';
+import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route path="/" element={<Login />} />
               <Route
@@ -89,7 +89,7 @@ const App = () => (
               />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </TooltipProvider>
       </FavoritesProvider>
     </AuthProvider>
