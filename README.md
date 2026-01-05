@@ -4,7 +4,7 @@ https://recipe-app-gamma-swart.vercel.app/
 
 A modern recipe app developed in React, allowing you to explore, search, favorite, and track the progress of food and drink recipes.
 
-## 🚀 Overview
+## Overview
 
 This project is a complete recipe app that uses the latest React features, including Hooks and Context API. With a mobile-optimized interface, users can:
 
@@ -14,7 +14,7 @@ This project is a complete recipe app that uses the latest React features, inclu
 - Track preparation progress
 - Share recipes
 
-## 🛠 Skills Developed
+## Skills Developed
 
 - State management with Context API
 - Development with React Hooks (useState, useContext, useEffect)
@@ -23,9 +23,9 @@ This project is a complete recipe app that uses the latest React features, inclu
 - **Automated testing with Vitest + React Testing Library**
 - Responsive design with Tailwind CSS
 
-## 📋 Features
+## Features
 
-### 🎯 Main Screens
+### Main Screens
 
 - **Login**: Authentication with email and password validation
 - **Main Recipes**: List of recipes with filters by category
@@ -36,7 +36,7 @@ This project is a complete recipe app that uses the latest React features, inclu
 - **Favorite Recipes**: List of recipes favorited by the user
 - **Recipes Made**: History of completed recipes
 
-## 🔧 Technologies Used
+## Technologies Used
 
 - React 18
 - TypeScript
@@ -49,7 +49,7 @@ This project is a complete recipe app that uses the latest React features, inclu
 - **Vitest + React Testing Library**
 - LocalStorage for data persistence
 
-## 🌐 APIs Used
+## APIs Used
 
 ### TheMealDB API
 Open database with recipes and ingredients from around the world.  
@@ -59,7 +59,7 @@ Open database with recipes and ingredients from around the world.
 Similar to TheMealDB, but focused on drinks and cocktails.  
 [Documentation](https://www.thecocktaildb.com/api.php)
 
-## 🗂 Project Structure
+## Project Structure
 
 ```
 src/
@@ -90,7 +90,7 @@ src/
 └── lib/           # Utilities
 ```
 
-## 🚀 How to Run
+## How to Run
 
 1. **Clone the repository**
    ```bash
@@ -118,7 +118,7 @@ src/
    npm run test:watch
    ```
 
-## 📱 Application Routes
+## Application Routes
 
 - `/` - Login screen
 - `/food` - Food recipes
@@ -129,7 +129,7 @@ src/
 - `/profile` - User profile
 - `/favorite-recipes` - Favorite recipes
 
-## 🧪 Tests
+## Tests
 
 The project uses **Vitest** and **React Testing Library** for automated testing. It includes:
 
@@ -167,7 +167,7 @@ npm run test:ui
 npm run test:coverage
 ```
 
-## 🎨 Design System
+## Design System
 
 The project uses a customized design system based on:
 - Tailwind CSS for styling
@@ -176,7 +176,7 @@ The project uses a customized design system based on:
 - Custom gradients and shadows
 - Smooth transitions and animations
 
-## 📦 Advanced Features
+## Advanced Features
 
 - **Smart Search**: Filter by ingredient, name, or first letter
 - **Favorites**: Local storage of favorite recipes
@@ -184,7 +184,7 @@ The project uses a customized design system based on:
 - **Sharing**: Copy recipe links
 - **Recommendations**: Cross-recommendation system (food→drinks)
 
-## 🤝 Development
+## Development
 
 This project was developed following modern front-end development practices, focusing on:
 
@@ -197,7 +197,7 @@ This project was developed following modern front-end development practices, foc
 
 ---
 
-## 📋 Available Scripts
+## Available Scripts
 
 ```json
 {
